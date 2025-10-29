@@ -53,7 +53,8 @@ function App() {
 
   return (
     <div className="App">
-    <h1>Trello Clone</h1>
+    <h2>Trello Clone</h2>
+    <div className="list-container">
     <div className="add-list">
       <input 
       type="text"
@@ -63,8 +64,7 @@ function App() {
       />
       <button onClick={addList}>Add List</button>
     </div>
-    
-    <div className="list-container">
+   
       {lists.map(list => (
         <div
           key={list.id}
@@ -78,7 +78,7 @@ function App() {
         
       ))}
     </div>
-    </div>
+     </div>
   );
 }
 
