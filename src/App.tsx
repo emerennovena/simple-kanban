@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 interface Card {
@@ -13,10 +13,16 @@ interface Container {
 }
 
 function App() {
-  const [containers, setContainers] = useState<Container[]>([])
+
   const [containerTitle, setContainerTitle] = useState('');
   const [showInput, setShowInput ] = useState(false);
   const [cardInputs, setCardInputs] = useState<{ [key: string]: string }>({});
+
+
+  const [containers, setContainers] = useState<Container[]>(() => {
+    const saved = localStorage.getItem('kanbanContainers');
+    return saved ? JSON.parse(saved) : [];  
+  });
 
   const handleAddClick = () => {
     const newContainerId = crypto.randomUUID();
@@ -26,7 +32,7 @@ function App() {
     }
 
     setCardInputs({ ...cardInputs, [newContainerId]: ''});
-    
+
     if(containerTitle.trim() === ''){return}
     setContainers([
       ...containers,
@@ -56,6 +62,9 @@ const addCard = (containerId: string) => {
   setCardInputs({ ...cardInputs, [containerId]: ''});
 };
 
+  useEffect (() => {
+  localStorage.setItem('kanbanContainers', JSON.stringify(containers));
+}, [containers]);
 
   return (
   <div className="App">
