@@ -68,7 +68,7 @@ const addCard = (containerId: string) => {
 
   return (
   <div className="App">
-    <h2>Kanban</h2>
+    <h2>Stacked Cards</h2>
     <div className='board'>
     <button onClick={handleAddClick}>
       { showInput ? 'Save Container' : 'Add Container'}
