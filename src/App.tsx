@@ -62,6 +62,11 @@ const addCard = (containerId: string) => {
   setCardInputs({ ...cardInputs, [containerId]: ''});
 };
 
+const deleteContainer = (containerId: string) => {
+  setContainers(containers.filter(col => col.id !== containerId));
+};
+
+
   useEffect (() => {
   localStorage.setItem('kanbanContainers', JSON.stringify(containers));
 }, [containers]);
@@ -102,9 +107,10 @@ const addCard = (containerId: string) => {
         <button onClick={() => addCard(col.id)}>
           Add Card
         </button>
+        <button onClick={() => deleteContainer(col.id)}>Delete Container</button>
       </div>
+      
     ))}   
-
   </div>
   </div>
   );
